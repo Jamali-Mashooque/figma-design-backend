@@ -8,13 +8,13 @@ const cookieParser = require("cookie-parser")
 const cors = require("cors");
 dotenv.config()
 app.use(cors({
-    origin: "http://localhost:5173",
+    origin: "https://figma-design-phi-opal.vercel.app",
       credentials: true
 }))
 app.use(express.json());
 app.use(cookieParser())
 app.use("/auth",authRoutes)
-app.get("/register-user",(req,res)=>{
+app.get("/",(req,res)=>{
     try {
         res.send("api is workig")
     } catch (error) {
