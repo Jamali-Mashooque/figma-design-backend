@@ -60,7 +60,13 @@ const loginUserController = async(req,res)=>{
         )
         console.log("token", token)
 
-         res.cookie("token", token)
+        res.cookie("token", token, {
+             httpOnly: true,
+               secure: true,
+             sameSite: "none",
+             
+               maxAge: 7 * 24 * 60 * 60 * 1000,
+                 });
         console.log("cookie", req.cookies);
         return res.status(200).json({ message: "Login Successsfully!", user })
     } catch (error) {
@@ -69,7 +75,11 @@ const loginUserController = async(req,res)=>{
 }
 const logoutUserController = ( req,res)=>{
     try {
-        res.clearCookie("token");
+        res.clearCookie("token", {
+           httpOnly: true,
+           secure: true,
+         sameSite: "none",
+          });
        return res.status(200).json({message:"Logout Successfully!"})
     } catch (error) {
         console.log("Server Error : " , error.message)
